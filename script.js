@@ -1,7 +1,8 @@
-let num1;
-let num2;
-let operator;
-let displayValue;
+let num1 = null;
+let num2 = null;
+let operator = null;
+let displayValue = 0;
+let result = null;
 
 const zero = document.querySelector("#zero");
 const one = document.querySelector("#one");
@@ -18,7 +19,9 @@ const minus = document.querySelector("#minus");
 const times = document.querySelector("#times");
 const over = document.querySelector("#over");
 const clear = document.querySelector("#clear");
+const equals = document.querySelector("#equals");
 const display = document.querySelector("#display");
+display.textContent = "0";
 
 zero.addEventListener("click", () => {
     display.textContent = "0";
@@ -68,6 +71,46 @@ eight.addEventListener("click", () => {
 nine.addEventListener("click", () => {
     display.textContent = "9";
     displayValue = 9;
+});
+
+clear.addEventListener("click", () => {
+    display.textContent = "0";
+    displayValue = 0;
+    num1 = null;
+    num2 = null;
+    operator = null;
+    result = null;
+});
+
+equals.addEventListener("click", () => {
+    num2 = displayValue;
+    result = operate(num1, operator, num2);
+    displayValue = result;
+    if (result.toString().length > 9) {
+        display.textContent = result.toString().substring(0, 9);
+    } else {
+        display.textContent = result;
+    }
+});
+
+plus.addEventListener("click", () => {
+    num1 = displayValue;
+    operator = "+";
+});
+
+minus.addEventListener("click", () => {
+    num1 = displayValue;
+    operator = "-";
+});
+
+times.addEventListener("click", () => {
+    num1 = displayValue;
+    operator = "*";
+});
+
+over.addEventListener("click", () => {
+    num1 = displayValue;
+    operator = "/";
 });
 
 const add = function(a, b) {
