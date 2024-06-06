@@ -1,6 +1,7 @@
 let num1 = null;
 let num2 = null;
-let operator = null;
+let operator1 = null;
+let operator2 = null;
 let displayValue = "";
 let result = null;
 
@@ -77,14 +78,21 @@ clear.addEventListener("click", () => {
     displayValue = "";
     num1 = null;
     num2 = null;
-    operator = null;
+    operator1 = null;
+    operator2 = null;
     result = null;
 });
 
 equals.addEventListener("click", () => {
     num2 = displayValue;
-    result = operate(Number(num1), operator, Number(num2));
+    if (operator2 === null) {
+        result = operate(Number(num1), operator1, Number(num2));
+    } else {
+        result = operate(Number(num1), operator2, Number(num2));
+    }
     displayValue = result;
+    operator1 = null;
+    operator2 = null;
     if (result.toString().length > 9) {
         display.textContent = result.toString().substring(0, 9);
     } else {
@@ -93,26 +101,75 @@ equals.addEventListener("click", () => {
 });
 
 plus.addEventListener("click", () => {
-    num1 = displayValue;
-    operator = "+";
+    if (operator1 === null) {
+        num1 = displayValue;
+        operator1 = "+";
+    } else {
+        num2 = displayValue;
+        result = operate(Number(num1), operator1, Number(num2));
+        num1 = result;
+        operator2 = "+";
+        if (result.toString().length > 9) {
+            display.textContent = result.toString().substring(0, 9);
+        } else {
+            display.textContent = result;
+        }
+    }
     displayValue = "";
+   
 });
 
 minus.addEventListener("click", () => {
-    num1 = displayValue;
-    operator = "-";
+    if (operator1 === null) {
+        num1 = displayValue;
+        operator1 = "-";
+    } else {
+        num2 = displayValue;
+        result = operate(Number(num1), operator1, Number(num2));
+        num1 = result;
+        operator2 = "-";
+        if (result.toString().length > 9) {
+            display.textContent = result.toString().substring(0, 9);
+        } else {
+            display.textContent = result;
+        }
+    }
     displayValue = "";
 });
 
 times.addEventListener("click", () => {
-    num1 = displayValue;
-    operator = "*";
+    if (operator1 === null) {
+        num1 = displayValue;
+        operator1 = "*";
+    } else {
+        num2 = displayValue;
+        result = operate(Number(num1), operator1, Number(num2));
+        num1 = result;
+        operator2 = "*";
+        if (result.toString().length > 9) {
+            display.textContent = result.toString().substring(0, 9);
+        } else {
+            display.textContent = result;
+        }
+    }
     displayValue = "";
 });
 
 over.addEventListener("click", () => {
-    num1 = displayValue;
-    operator = "/";
+    if (operator1 === null) {
+        num1 = displayValue;
+        operator1 = "/";
+    } else {
+        num2 = displayValue;
+        result = operate(Number(num1), operator1, Number(num2));
+        num1 = result;
+        operator2 = "/";
+        if (result.toString().length > 9) {
+            display.textContent = result.toString().substring(0, 9);
+        } else {
+            display.textContent = result;
+        }
+    }
     displayValue = "";
 });
 
@@ -132,8 +189,8 @@ const divide = function(a, b) {
     return a / b;
 }
 
-const operate = function(num1, operator, num2) {
-    switch (operator) {
+const operate = function(num1, operator1, num2) {
+    switch (operator1) {
         case "+":
             return add(num1, num2);
             break;
