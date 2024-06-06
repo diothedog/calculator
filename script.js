@@ -84,19 +84,23 @@ clear.addEventListener("click", () => {
 });
 
 equals.addEventListener("click", () => {
-    num2 = displayValue;
-    if (operator2 === null) {
-        result = operate(Number(num1), operator1, Number(num2));
+    if (operator1 === null) {
+        display.textContent = displayValue;
     } else {
-        result = operate(Number(num1), operator2, Number(num2));
-    }
-    displayValue = result;
-    operator1 = null;
-    operator2 = null;
-    if (result.toString().length > 9) {
-        display.textContent = result.toString().substring(0, 9);
-    } else {
-        display.textContent = result;
+        num2 = displayValue;
+        if (operator2 === null) {
+            result = operate(Number(num1), operator1, Number(num2));
+        } else {
+            result = operate(Number(num1), operator2, Number(num2));
+        }
+        displayValue = result;
+        operator1 = null;
+        operator2 = null;
+        if (result.toString().length > 9) {
+            display.textContent = result.toString().substring(0, 9);
+        } else {
+            display.textContent = result;
+        }
     }
 });
 
