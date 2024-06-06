@@ -186,6 +186,9 @@ const multiply = function(a, b) {
 }
 
 const divide = function(a, b) {
+    if (b === 0) {
+        return "lol :D"
+    }
     return a / b;
 }
 
